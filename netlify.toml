@@ -1,3 +1,8 @@
 [build]
-  command = "npm install"
   functions = "netlify/functions"
+
+# 아래 [dev] 블록이 핵심입니다.
+[dev]
+  publish = "."         # 웹사이트 파일이 있는 루트 폴더
+  port = 8888           # 브라우저로 접속할 주소 (http://localhost:8888)
+  functionsPort = 34567 # 백엔드 함수가 실행될 내부 포트
