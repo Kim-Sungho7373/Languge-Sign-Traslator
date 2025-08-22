@@ -7,43 +7,12 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-        .loader {
-            border: 5px solid #f3f3f3;
-            border-top: 5px solid #4f46e5; /* indigo-600 */
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            animation: spin 1s linear infinite;
-        }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        .message-box {
-            position: fixed;
-            top: -100px;
-            left: 50%;
-            transform: translateX(-50%);
-            padding: 1rem 2rem;
-            background-color: #ef4444; /* red-500 */
-            color: white;
-            border-radius: 0.5rem;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: top 0.5s ease-in-out;
-            z-index: 1000;
-        }
-        /* Fade-in animation for results */
-        .fade-in {
-            animation: fadeInAnimation 0.5s ease-in forwards;
-            opacity: 0;
-        }
-        @keyframes fadeInAnimation {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+        body { font-family: 'Inter', sans-serif; }
+        .loader { border: 5px solid #f3f3f3; border-top: 5px solid #4f46e5; border-radius: 50%; width: 50px; height: 50px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .message-box { position: fixed; top: -100px; left: 50%; transform: translateX(-50%); padding: 1rem 2rem; background-color: #ef4444; color: white; border-radius: 0.5rem; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); transition: top 0.5s ease-in-out; z-index: 1000; }
+        .fade-in { animation: fadeInAnimation 0.5s ease-in forwards; opacity: 0; }
+        @keyframes fadeInAnimation { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
     </style>
 </head>
 <body class="bg-gray-100 flex items-center justify-center min-h-screen p-4">
@@ -58,15 +27,12 @@
                 <!-- Upload Section -->
                 <div id="upload-section">
                     <div class="bg-gray-50 border-2 border-dashed border-gray-300 rounded-xl p-6 text-center mb-6">
-                        <div id="image-preview-container" class="hidden mb-4">
-                            <img id="image-preview" src="#" alt="Uploaded image preview" class="max-h-64 mx-auto rounded-lg shadow-md"/>
-                        </div>
+                        <div id="image-preview-container" class="hidden mb-4"><img id="image-preview" src="#" alt="Uploaded image preview" class="max-h-64 mx-auto rounded-lg shadow-md"/></div>
                         <div id="upload-prompt">
                             <svg class="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48" aria-hidden="true"><path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg>
                             <p class="mt-2 text-sm text-gray-600">
-                                <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500">
+                                <label for="file-upload" class="relative cursor-pointer bg-white rounded-md font-medium text-indigo-600 hover:text-indigo-500">
                                     <span>Choose a file or use camera</span>
-                                    <!-- Add capture attribute for mobile camera access -->
                                     <input id="file-upload" name="file-upload" type="file" class="sr-only" accept="image/*" capture="environment">
                                 </label>
                             </p>
@@ -74,40 +40,46 @@
                         </div>
                     </div>
                     <div class="text-center">
-                        <button id="analyze-button" class="w-full md:w-auto bg-indigo-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-indigo-700 disabled:bg-gray-400 disabled:cursor-not-allowed" disabled>
-                            Analyze Art
-                        </button>
+                        <button id="analyze-button" class="w-full md:w-auto bg-indigo-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-indigo-700 disabled:bg-gray-400" disabled>Analyze Art</button>
                     </div>
                 </div>
 
                 <!-- Result Section -->
                 <div id="result-section" class="hidden">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
-                        <!-- Analyzed Image -->
                         <div class="fade-in">
                             <h3 class="text-lg font-semibold text-gray-700 mb-2 text-center">Your Image</h3>
                             <img id="result-image" src="#" alt="Analyzed art" class="w-full h-auto object-contain rounded-xl shadow-lg border"/>
                         </div>
-                        <!-- Sign Language Video -->
                         <div class="fade-in" style="animation-delay: 0.1s;">
                             <h3 class="text-lg font-semibold text-gray-700 mb-2 text-center">Emotion in Sign</h3>
                             <div class="aspect-w-16 aspect-h-9 bg-black rounded-xl overflow-hidden shadow-lg">
-                                <video id="sign-language-video" class="w-full h-full object-cover" controls autoplay muted loop>Your browser does not support the video tag.</video>
+                                <video id="sign-language-video" class="w-full h-full object-cover" controls autoplay muted loop></video>
                             </div>
                         </div>
                     </div>
 
                     <div class="space-y-6">
-                        <!-- AI Analysis Text -->
-                        <div class="bg-gray-50 p-6 rounded-xl fade-in" style="animation-delay: 0.2s;">
+                        <!-- Artwork Details -->
+                        <div id="artwork-details-container" class="bg-gray-50 p-6 rounded-xl fade-in" style="animation-delay: 0.2s;">
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">Artwork Details</h3>
+                            <p class="text-gray-600 text-lg">
+                                <strong class="text-gray-900">Title:</strong> <span id="artwork-title"></span><br>
+                                <strong class="text-gray-900">Artist:</strong> <span id="artwork-artist"></span>
+                            </p>
+                        </div>
+                        <!-- In-depth Analysis -->
+                        <div class="bg-gray-50 p-6 rounded-xl fade-in" style="animation-delay: 0.3s;">
+                            <h3 class="text-xl font-bold text-gray-800 mb-2">In-depth Analysis</h3>
+                            <p id="in-depth-analysis" class="text-gray-600 text-lg"></p>
+                        </div>
+                        <!-- Core Emotion -->
+                        <div class="bg-gray-50 p-6 rounded-xl fade-in" style="animation-delay: 0.4s;">
                             <h3 class="text-xl font-bold text-gray-800 mb-2">Core Emotion</h3>
                             <p id="emotion-keyword" class="text-3xl font-bold text-indigo-600"></p>
                         </div>
-                        <div class="bg-gray-50 p-6 rounded-xl fade-in" style="animation-delay: 0.3s;">
-                            <h3 class="text-xl font-bold text-gray-800 mb-2">AI's Description</h3>
-                            <p id="descriptive-text" class="text-gray-600 text-lg"></p>
-                        </div>
-                         <div class="bg-indigo-50 p-6 rounded-xl fade-in" style="animation-delay: 0.4s;">
+                        <!-- Question for You -->
+                         <div class="bg-indigo-50 p-6 rounded-xl fade-in" style="animation-delay: 0.5s;">
                             <h3 class="text-xl font-bold text-indigo-800 mb-2">A Question for You</h3>
                             <p id="thought-provoking-question" class="text-indigo-700 text-lg italic"></p>
                         </div>
@@ -117,10 +89,7 @@
                         <button id="reset-button" class="w-full md:w-auto bg-gray-600 text-white font-bold py-3 px-8 rounded-lg hover:bg-gray-700">Analyze Another</button>
                     </div>
                 </div>
-                 <!-- Loading Spinner (Full screen overlay) -->
-                <div id="loading-overlay" class="hidden fixed inset-0 bg-white bg-opacity-75 flex items-center justify-center z-50">
-                    <div class="loader"></div>
-                </div>
+                <div id="loading-overlay" class="hidden fixed inset-0 bg-white bg-opacity-75 flex items-center justify-center z-50"><div class="loader"></div></div>
             </main>
         </div>
     </div>
@@ -132,25 +101,21 @@
         const resultSection = document.getElementById('result-section');
         const fileUpload = document.getElementById('file-upload');
         const imagePreview = document.getElementById('image-preview');
-        const imagePreviewContainer = document.getElementById('image-preview-container');
-        const uploadPrompt = document.getElementById('upload-prompt');
         const analyzeButton = document.getElementById('analyze-button');
         const resetButton = document.getElementById('reset-button');
         const loadingOverlay = document.getElementById('loading-overlay');
         const resultImage = document.getElementById('result-image');
         const signLanguageVideo = document.getElementById('sign-language-video');
+        const artworkDetailsContainer = document.getElementById('artwork-details-container');
+        const artworkTitle = document.getElementById('artwork-title');
+        const artworkArtist = document.getElementById('artwork-artist');
+        const inDepthAnalysis = document.getElementById('in-depth-analysis');
         const emotionKeyword = document.getElementById('emotion-keyword');
-        const descriptiveText = document.getElementById('descriptive-text');
         const thoughtProvokingQuestion = document.getElementById('thought-provoking-question');
-        const messageBox = document.getElementById('message-box');
         
         let uploadedFile = null;
 
-        const emotions = {
-            'Joy': 'joy.mp4', 'Trust': 'trust.mp4', 'Fear': 'fear.mp4', 'Surprise': 'surprise.mp4',
-            'Sadness': 'sadness.mp4', 'Disgust': 'disgust.mp4', 'Anger': 'anger.mp4', 'Anticipation': 'anticipation.mp4'
-        };
-        const emotionKeys = Object.keys(emotions);
+        const emotions = { 'Joy': 'joy.mp4', 'Trust': 'trust.mp4', 'Fear': 'fear.mp4', 'Surprise': 'surprise.mp4', 'Sadness': 'sadness.mp4', 'Disgust': 'disgust.mp4', 'Anger': 'anger.mp4', 'Anticipation': 'anticipation.mp4' };
 
         // Event Listeners
         fileUpload.addEventListener('change', handleFileSelect);
@@ -163,9 +128,9 @@
                 uploadedFile = file;
                 const reader = new FileReader();
                 reader.onload = (e) => {
+                    document.getElementById('image-preview-container').classList.remove('hidden');
+                    document.getElementById('upload-prompt').classList.add('hidden');
                     imagePreview.src = e.target.result;
-                    imagePreviewContainer.classList.remove('hidden');
-                    uploadPrompt.classList.add('hidden');
                     analyzeButton.disabled = false;
                 };
                 reader.readAsDataURL(file);
@@ -175,17 +140,11 @@
         function resetUI() {
             resultSection.classList.add('hidden');
             uploadSection.classList.remove('hidden');
-            imagePreviewContainer.classList.add('hidden');
-            uploadPrompt.classList.remove('hidden');
+            document.getElementById('image-preview-container').classList.add('hidden');
+            document.getElementById('upload-prompt').classList.remove('hidden');
             analyzeButton.disabled = true;
-            fileUpload.value = ''; // Clear file input
+            fileUpload.value = '';
             uploadedFile = null;
-        }
-
-        function showMessage(message) {
-            messageBox.textContent = message;
-            messageBox.style.top = '20px';
-            setTimeout(() => { messageBox.style.top = '-100px'; }, 3000);
         }
 
         function fileToBase64(file) {
@@ -198,60 +157,36 @@
         }
 
         async function analyzeImageWithAI(file) {
-            if (!file) {
-                showMessage('Please select an image to analyze first.');
-                return;
-            }
-
+            if (!file) return;
             loadingOverlay.classList.remove('hidden');
             analyzeButton.disabled = true;
 
             try {
                 const base64ImageData = await fileToBase64(file);
-                
-                const prompt = `Analyze this image for an art interpretation app for the deaf. Provide the following three things in a JSON object:
-1.  "emotion": The dominant emotion from this list: ${emotionKeys.join(', ')}.
-2.  "description": A single, concise sentence describing the visual elements of the image.
-3.  "question": A short, thought-provoking question for the viewer about the image.`;
-
-                const payload = {
-                    contents: [{
-                        parts: [
-                            { text: prompt },
-                            { inlineData: { mimeType: file.type, data: base64ImageData } }
-                        ]
-                    }],
-                    generationConfig: {
-                        responseMimeType: "application/json",
-                    }
-                };
-
-                const apiKey = "AIzaSyBWpr57588yuPTyXdv2OEIqYzvv8YXfr6A"; // IMPORTANT: Replace with your actual API key
-                const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+                const apiUrl = `/.netlify/functions/analyze`;
                 
                 const response = await fetch(apiUrl, {
                     method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify(payload)
+                    headers: { 'Content-Type': 'application-json' },
+                    body: JSON.stringify({ image: base64ImageData, mimeType: file.type })
                 });
 
-                if (!response.ok) throw new Error(`API request failed: ${response.statusText}`);
-
-                const result = await response.json();
-                const analysisText = result.candidates?.[0]?.content?.parts?.[0]?.text;
-                if (!analysisText) throw new Error("AI response was empty.");
-                
-                const analysis = JSON.parse(analysisText);
-
-                if (analysis.emotion && emotions[analysis.emotion] && analysis.description && analysis.question) {
-                    displayResults(analysis);
-                } else {
-                    throw new Error("AI response was missing required fields.");
+                if (!response.ok) {
+                    const errorResult = await response.json();
+                    throw new Error(errorResult.error || `Request failed`);
                 }
+
+                const analysis = await response.json();
+                if (!analysis.emotion) throw new Error("AI response was invalid.");
+                
+                displayResults(analysis);
 
             } catch (error) {
                 console.error('AI analysis error:', error);
-                showMessage('Image analysis failed. Please try again.');
+                const messageBox = document.getElementById('message-box');
+                messageBox.textContent = error.message || 'Image analysis failed. Please try again.';
+                messageBox.style.top = '20px';
+                setTimeout(() => { messageBox.style.top = '-100px'; }, 3000);
             } finally {
                 loadingOverlay.classList.add('hidden');
                 analyzeButton.disabled = false;
@@ -259,17 +194,103 @@
         }
 
         function displayResults(analysis) {
-            // Populate the result fields
             resultImage.src = imagePreview.src;
+
+            // Show artwork details only if found
+            if (analysis.title && analysis.title.toLowerCase() !== 'unknown') {
+                artworkTitle.textContent = analysis.title;
+                artworkArtist.textContent = analysis.artist;
+                artworkDetailsContainer.classList.remove('hidden');
+            } else {
+                artworkDetailsContainer.classList.add('hidden');
+            }
+
+            inDepthAnalysis.textContent = analysis.analysis;
             emotionKeyword.textContent = analysis.emotion;
-            descriptiveText.textContent = analysis.description;
             thoughtProvokingQuestion.textContent = analysis.question;
-            signLanguageVideo.src = `./videos/${emotions[analysis.emotion]}`;
             
-            // Switch views
+            if (emotions[analysis.emotion]) {
+                signLanguageVideo.src = `./videos/${emotions[analysis.emotion]}`;
+            } else {
+                // Fallback if emotion is not in our list
+                signLanguageVideo.src = ''; 
+            }
+            
             uploadSection.classList.add('hidden');
             resultSection.classList.remove('hidden');
         }
     </script>
 </body>
 </html>
+```javascript
+// This file should be at: netlify/functions/analyze.js
+const fetch = require('node-fetch');
+
+exports.handler = async (event) => {
+    if (event.httpMethod !== 'POST') {
+        return { statusCode: 405, body: JSON.stringify({ error: 'Method Not Allowed' }) };
+    }
+
+    try {
+        const { image, mimeType } = JSON.parse(event.body);
+        if (!image || !mimeType) {
+            return { statusCode: 400, body: JSON.stringify({ error: 'Missing image data' }) };
+        }
+
+        const apiKey = process.env.GOOGLE_API_KEY;
+        if (!apiKey) {
+            return { statusCode: 500, body: JSON.stringify({ error: 'API key is not configured' }) };
+        }
+
+        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
+
+        const emotions = ['Joy', 'Trust', 'Fear', 'Surprise', 'Sadness', 'Disgust', 'Anger', 'Anticipation'];
+        
+        // This is the new, much more powerful prompt for RAG-like behavior
+        const prompt = `You are an expert art docent. Analyze the provided image and return a JSON object with the following structure:
+{
+  "title": "Identify the title of this artwork. If it's not a famous piece, respond with 'Unknown'.",
+  "artist": "Identify the artist of this artwork. If unknown, respond with 'Unknown'.",
+  "analysis": "Based on the artwork's identity, artist, and historical context, provide a short, insightful analysis (2-3 sentences). If the artwork is unknown, provide an analysis based on its visual style and composition.",
+  "emotion": "From the list [${emotions.join(', ')}], choose the single most dominant emotion conveyed by the artwork.",
+  "question": "Based on your analysis, formulate one short, thought-provoking question to encourage the viewer to look closer and think deeper."
+}`;
+        
+        const payload = {
+            contents: [{
+                parts: [
+                    { text: prompt },
+                    { inlineData: { mimeType: mimeType, data: image } }
+                ]
+            }],
+            generationConfig: {
+                responseMimeType: "application/json",
+            }
+        };
+
+        const response = await fetch(apiUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error('Google AI API Error:', errorData);
+            return { statusCode: response.status, body: JSON.stringify({ error: 'Failed to get analysis from AI.' }) };
+        }
+
+        const result = await response.json();
+        const analysisText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+
+        return {
+            statusCode: 200,
+            headers: { 'Content-Type': 'application/json' },
+            body: analysisText // Forward the JSON response directly to the frontend
+        };
+
+    } catch (error) {
+        console.error('Serverless function error:', error);
+        return { statusCode: 500, body: JSON.stringify({ error: 'An internal error occurred.' }) };
+    }
+};

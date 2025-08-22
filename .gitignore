@@ -3,3 +3,8 @@ node_modules/
 
 # macOS
 .DS_Store
+
+# .gitignore 파일 맨 아래에 추가
+.env
+# Local Netlify folder
+.netlify
