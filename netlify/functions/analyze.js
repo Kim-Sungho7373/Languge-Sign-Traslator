@@ -12,7 +12,7 @@ exports.handler = async (event) => {
             return { statusCode: 400, body: JSON.stringify({ error: 'Missing image data' }) };
         }
 
-        const apiKey = process.env.GPT_API_KEY;
+       const apiKey = process.env.OPENAI_API_KEY || process.env.GPT_API_KEY;
         if (!apiKey) {
             return { statusCode: 500, body: JSON.stringify({ error: 'GPT API key is not configured' }) };
         }
